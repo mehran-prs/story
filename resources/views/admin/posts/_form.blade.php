@@ -1,5 +1,5 @@
 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-    {!! Form::label('title', 'Title', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('title', 'عنوان', ['class' => 'col-md-2 control-label']) !!}
 
     <div class="col-md-8">
         {!! Form::text('title', null, ['class' => 'form-control', 'required', 'autofocus']) !!}
@@ -10,8 +10,33 @@
     </div>
 </div>
 
+<div class="form-group{{ $errors->has('poster') ? ' has-error' : '' }}">
+    {!! Form::label('poster', 'پوستر', ['class' => 'col-md-2 control-label']) !!}
+
+    <div class="col-md-8">
+        {!! Form::file('poster', null, ['class' => 'form-control', 'required', 'autofocus']) !!}
+
+        <span class="help-block">
+            <strong>{{ $errors->first('poster') }}</strong>
+        </span>
+    </div>
+</div>
+
+
+<div class="form-group{{ $errors->has('poster') ? ' has-error' : '' }}">
+    {!! Form::label('voice', 'قصه شنیدنی', ['class' => 'col-md-2 control-label']) !!}
+
+    <div class="col-md-8">
+        {!! Form::file('voice', null, ['class' => 'form-control', 'required', 'autofocus']) !!}
+
+        <span class="help-block">
+            <strong>{{ $errors->first('voice') }}</strong>
+        </span>
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-    {!! Form::label('body', 'Body', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('body', 'قصه', ['class' => 'col-md-2 control-label']) !!}
 
     <div class="col-md-8">
         {!! Form::textarea('body', null, ['class' => 'form-control', 'required']) !!}
@@ -22,8 +47,9 @@
     </div>
 </div>
 
+
 <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-    {!! Form::label('category_id', 'Category', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('category_id', 'دسته', ['class' => 'col-md-2 control-label']) !!}
 
     <div class="col-md-8">
         {!! Form::select('category_id', $categories, null, ['class' => 'form-control', 'required']) !!}
@@ -41,9 +67,8 @@
         $tag = null;
     }
 @endphp
-
 <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
-    {!! Form::label('tags', 'Tag', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('tags', 'تگ ها', ['class' => 'col-md-2 control-label']) !!}
 
     <div class="col-md-8">
         {!! Form::select('tags[]', $tags, $tag, ['class' => 'form-control select2-tags', 'required', 'multiple']) !!}

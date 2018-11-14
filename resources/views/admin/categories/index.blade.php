@@ -8,9 +8,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>
-                            Categories
+                            دسته بندی
 
-                            <a href="{{ url('admin/categories/create') }}" class="btn btn-default pull-right">Create New</a>
+                            <a href="{{ url('admin/categories/create') }}" class="btn btn-default pull-left">ایجاد دسته</a>
                         </h2>
                     </div>
 
@@ -18,9 +18,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Post Count</th>
-                                    <th>Action</th>
+                                    <th>نام</th>
+                                    <th>تعداد قصه ها</th>
+                                    <th>عمل</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,13 +29,13 @@
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->posts_count }}</td>
                                         <td>
-                                            <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
-                                            <a href="{{ url("/admin/categories/{$category->id}") }}" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-danger">Delete</a>
+                                            <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">ویرایش</a>
+                                            <a href="{{ url("/admin/categories/{$category->id}") }}" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-danger">حذف</a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2">No category available.</td>
+                                        <td colspan="2">دسته ای وحود ندارد.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

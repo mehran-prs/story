@@ -8,9 +8,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>
-                            Create Category
+                            ایجاد دسته
 
-                            <a href="{{ url('admin/categories') }}" class="btn btn-default pull-right">Go Back</a>
+                            <a href="{{ url('admin/categories') }}" class="btn btn-default pull-left">بازگشت</a>
                         </h2>
                     </div>
 
@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-2">
                                     <button type="submit" class="btn btn-primary">
-                                        Create
+                                        ایجاد
                                     </button>
                                 </div>
                             </div>

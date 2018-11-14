@@ -1,0 +1,92 @@
+@font-face {
+  font-family: 'yekan';
+  src: url(../fonts/Yekan.eot);
+  src: url(../fonts/Yekan.eot?#iefix) format("embedded-opentype"),
+  url(../fonts/Yekan.woff) format("woff"), url(../fonts/Yekan.ttf) format("truetype"),
+  url(../fonts/Yekan.svg#BYekan) format("svg");
+
+  font-weight: normal;
+  font-style: normal
+}
+
+.nice-shadow() {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05), 0 3px 6px rgba(0, 0, 0, 0.07)
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+body {
+  background: white;
+
+  font-family: yekan, "Raleway", sans-serif;
+  .pagination{
+    font-family: sans-serif;
+  }
+}
+
+#app {
+  .navbar {
+    .nice-shadow();
+    background: #333;
+
+    a {
+      color: white;
+    }
+
+    .dropdown-menu a{
+      color: black;
+    }
+  }
+
+  .navbar-brand {
+    font-size: 25px;
+    background: rgba(239, 239, 239, 0.26);
+  }
+}
+
+.story-card {
+  border: none;
+  &:not(.trans) {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  }
+
+  .panel-img {
+    text-align: center;
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+  .panel-heading {
+    font-size: 18px;
+  }
+
+  .t {
+    font-size: 11px;
+  }
+
+  .voice{
+    margin: 10px;
+  }
+}
+
+.story-search{
+  input{
+    border-radius: 1px;
+    height: 60px;
+  }
+  button{
+    height: 60px;
+  }
+}

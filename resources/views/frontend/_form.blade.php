@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Write your comment</div>
+    <div class="panel-heading">نظر خودتو بنویس</div>
 
     <div class="panel-body">
         {!! Form::open(['url' => "posts/{$post->id}/comment"]) !!}
@@ -8,7 +8,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
-                    Reply
+                    پاسخ
                 </button>
             </div>
         {!! Form::close() !!}

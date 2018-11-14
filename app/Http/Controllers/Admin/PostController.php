@@ -8,6 +8,9 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -39,18 +42,38 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
     {
+
+        // Upload Image If Exists:
+        $v = Validator::make($request->all(), [
+            'poster' => 'bail|required|file|image'
+        ]);
+
+        $v2 = Validator::make($request->all(), [
+            'voice' => 'bail|required|file|mimes:mpga'
+        ]);
+
+        if (!$v->fails()) {
+            $posterPath = $request->file('poster')->store('posters');
+        }
+
+        if (!$v2->fails()) {
+            $voicePath = $request->file('voice')->store('voices');
+        }
+
         $post = Post::create([
             'title'       => $request->title,
             'body'        => $request->body,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'poster'      => $posterPath ?? null,
+            'voice'       => $voicePath ?? null,
         ]);
 
-        $tagsId = collect($request->tags)->map(function($tag) {
+        $tagsId = collect($request->tags)->map(function ($tag) {
             return Tag::firstOrCreate(['name' => $tag])->id;
         });
 
@@ -63,7 +86,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -76,12 +99,12 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
     {
-        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+        if ($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
             flash()->overlay("You can't edit other peoples post.");
             return redirect('/admin/posts');
         }
@@ -95,19 +118,50 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(PostRequest $request, Post $post)
     {
+
+        $v = Validator::make($request->all(), [
+            'poster' => 'bail|required|file|image'
+        ]);
+
+
+        $v2 = Validator::make($request->all(), [
+            'voice' => 'bail|required|mimes:mp3,mpga,wav,audio/mp3,audio/mpeg'
+        ]);
+
+        if (!$v->fails()) {
+
+            // If Exists old poster, remove:
+            if ($post->poster)
+                Storage::delete($post->poster);
+
+            $posterPath = $request->file('poster')->store('posters');
+        }
+        Log::info($v2->errors()->all());
+        if (!$v2->fails()) {
+
+            // If Exists old voice, remove:
+            if ($post->voice)
+                Storage::delete($post->voice);
+
+            $voicePath = $request->file('voice')->store('voices');
+        }
+
+
         $post->update([
             'title'       => $request->title,
             'body'        => $request->body,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'poster'      => $posterPath ?? $post->poster,
+            'voice'       => $voicePath ?? $post->voice,
         ]);
 
-        $tagsId = collect($request->tags)->map(function($tag) {
+        $tagsId = collect($request->tags)->map(function ($tag) {
             return Tag::firstOrCreate(['name' => $tag])->id;
         });
 
@@ -120,12 +174,12 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+        if ($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
             flash()->overlay("You can't delete other peoples post.");
             return redirect('/admin/posts');
         }

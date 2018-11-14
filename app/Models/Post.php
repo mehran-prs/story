@@ -13,6 +13,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
+        'poster',
+        'voice',
         'user_id',
         'category_id',
         'is_published'
@@ -23,7 +25,7 @@ class Post extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            if(is_null($post->user_id)) {
+            if (is_null($post->user_id)) {
                 $post->user_id = auth()->user()->id;
             }
         });

@@ -8,24 +8,29 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>
-                            Edit Post
+                            ویرایش قصه
 
-                            <a href="{{ url('admin/posts') }}" class="btn btn-default pull-right">Go Back</a>
+                            <a href="{{ url('admin/posts') }}" class="btn btn-default pull-left">بازگشت</a>
                         </h2>
                     </div>
 
                     <div class="panel-body">
-                        {!! Form::model($post, ['method' => 'PUT', 'url' => "/admin/posts/{$post->id}", 'class' => 'form-horizontal', 'role' => 'form']) !!}
+                        {!! Form::model($post, ['method' => 'PUT',
+                        'url' => "/admin/posts/{$post->id}",
+                         'class' => 'form-horizontal',
+                          'role' => 'form',
+                          'enctype'=>"multipart/form-data"
+                          ]) !!}
 
-                            @include('admin.posts._form')
+                        @include('admin.posts._form')
 
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-2">
-                                    <button type="submit" class="btn btn-primary">
-                                        Update
-                                    </button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <button type="submit" class="btn btn-primary">
+                                    تایید
+                                </button>
                             </div>
+                        </div>
 
                         {!! Form::close() !!}
                     </div>

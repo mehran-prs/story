@@ -8,9 +8,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>
-                            Posts
+                            قصه ها
 
-                            <a href="{{ url('admin/posts/create') }}" class="btn btn-default pull-right">Create New</a>
+                            <a href="{{ url('admin/posts/create') }}" class="btn btn-default pull-left">داستان جدید</a>
                         </h2>
                     </div>
 
@@ -18,13 +18,13 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Body</th>
-                                    <th>Author</th>
-                                    <th>Category</th>
-                                    <th>Tags</th>
-                                    <th>Published</th>
-                                    <th>Action</th>
+                                    <th>عنوان</th>
+                                    <th>قصه</th>
+                                    <th>نویسنده</th>
+                                    <th>دسته</th>
+                                    <th>تگ ها</th>
+                                    <th>انتشار</th>
+                                    <th>عمل</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,14 +47,14 @@
                                                 @endphp
                                                 <a href="{{ url("/admin/posts/{$post->id}/publish") }}" data-method="PUT" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-warning">{{ $label }}</a>
                                             @endif
-                                            <a href="{{ url("/admin/posts/{$post->id}") }}" class="btn btn-xs btn-success">Show</a>
-                                            <a href="{{ url("/admin/posts/{$post->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
-                                            <a href="{{ url("/admin/posts/{$post->id}") }}" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-danger">Delete</a>
+                                            <a href="{{ url("/admin/posts/{$post->id}") }}" class="btn btn-xs btn-success">نمایش</a>
+                                            <a href="{{ url("/admin/posts/{$post->id}/edit") }}" class="btn btn-xs btn-info">ویرایش</a>
+                                            <a href="{{ url("/admin/posts/{$post->id}") }}" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-danger">حذف</a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5">No post available.</td>
+                                        <td colspan="5">داستانی وجود ندارد</td>
                                     </tr>
                                 @endforelse
                             </tbody>
